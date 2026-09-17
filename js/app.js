@@ -107,11 +107,18 @@ const cc = section => content[state.lang][section];
 const itemText = (item, key) => item[`${key}_${state.lang}`] || item[`${key}_en`] || '';
 const money = value => new Intl.NumberFormat(state.lang === 'th' ? 'th-TH' : 'en-US', { style: 'currency', currency: 'THB', maximumFractionDigits: 0 }).format(value);
 const statusMarkup = status => `<span class="status ${status}">${tr(status)}</span>`;
-const image = (src, alt, eager = false) => `<img src="${src}" alt="${alt}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
+// Photos built by scripts/build-web-images.cjs exist in two sizes: X.jpg (2400px) and X-sm.jpg (1200px).
+// srcset lets phones on 4G and small cards take the 1200px file while full-bleed and Retina views stay sharp.
+// IMG_V busts browser caches when photos are rebuilt under the same file names — bump it with each image rebuild.
+const IMG_V = '2026-09-17d';
+const HIRES = /^images\/(RW-\d{4}-\d+|scenes\/[\w-]+)\.jpg$/;
+const versioned = src => `${src}?v=${IMG_V}`;
+const srcsetFor = src => HIRES.test(src) ? `srcset="${versioned(src.replace(/\.jpg$/, '-sm.jpg'))} 1200w, ${versioned(src)} 2400w"` : '';
+const image = (src, alt, eager = false, sizes = '100vw') => `<img src="${versioned(src)}" ${srcsetFor(src)} sizes="${sizes}" alt="${alt}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
 
 function productCard(item, eager = false) {
   return `<a class="product-card ${item.status === 'sold' ? 'is-sold' : ''} reveal" href="#/item/${item.code}">
-    <div class="product-image">${image(item.hero, `${item.code} — ${itemText(item, 'name')}`, eager)}${statusMarkup(item.status)}</div>
+    <div class="product-image">${image(item.hero, `${item.code} — ${itemText(item, 'name')}`, eager, '(max-width: 700px) 92vw, 34vw')}${statusMarkup(item.status)}</div>
     <div class="product-meta"><span class="product-code">${item.code} · ${itemText(item, 'type')}</span><h3 class="product-name">${itemText(item, 'name')}</h3><span class="product-price">${money(item.price)}</span></div>
   </a>`;
 }
@@ -158,9 +165,9 @@ function itemPage(code) {
   const carriersText = state.lang === 'th' ? `${item.carriers} คน` : `${item.carriers} ${item.carriers === 1 ? 'person' : 'people'}`;
   const deliveryNote = tr('delivery_note').replace('{kg}', item.weight_kg).replace('{people}', carriersText);
   return `<article class="page item-page">
-    <section class="item-hero"><div class="item-hero-code">${item.code}</div><div class="item-hero-image">${image(item.hero, `${item.code} — ${itemText(item, 'name')}`, true)}${isGenerated(item.hero) ? `<span class="visualisation-note">${tr('visualisation')}</span>` : ''}</div><div class="item-hero-copy"><p class="kicker">${itemText(item, 'type')} · ${itemText(item, 'wood')}</p><h1>${itemText(item, 'name')}</h1><p class="hero-status ${item.status}">${tr(item.status)}</p><p class="item-price">${money(item.price)}</p><a class="button price-ask" href="${lineHref(linePriceText)}" ${contactAttrs(CONTACT.lineId, true)}>${tr('price_ask')} ↗</a><a class="text-link" href="#item-story">${tr('story_piece')} <span>↓</span></a></div></section>
+    <section class="item-hero"><div class="item-hero-code">${item.code}</div><div class="item-hero-image">${image(item.hero, `${item.code} — ${itemText(item, 'name')}`, true)}${isGenerated(item.hero) ? `<span class="visualisation-note">${tr('visualisation')}</span>` : ''}</div><div class="item-hero-copy"><p class="kicker">${itemText(item, 'type')} · ${itemText(item, 'wood')}</p><h1>${itemText(item, 'name')}</h1><p class="hero-status ${item.status}">${tr(item.status)}</p><p class="item-price">${money(item.price)}</p><div class="price-actions"><a class="button price-ask" href="${lineHref(linePriceText)}" ${contactAttrs(CONTACT.lineId, true)}>${tr('price_ask')} ↗</a><a class="button price-call" href="${telHref()}" ${contactAttrs(CONTACT.phone)}>${tr('call')}</a></div><a class="text-link" href="#item-story">${tr('story_piece')} <span>↓</span></a></div></section>
     <section class="item-intro" id="item-story"><p class="eyebrow">${tr('story_piece')}</p><div class="item-story reveal"><h2 class="section-title">${itemText(item, 'name')}</h2><p>${itemText(item, 'story')}</p></div></section>
-    <section class="item-gallery" aria-label="Product gallery">${gallery.map((src, index) => `<button class="gallery-image reveal" type="button" data-gallery-index="${index}">${image(src, `${item.code} — ${isGenerated(src) ? tr('visualisation') : tr('warehouse_photo')} ${index + 1}`)}</button>`).join('')}</section>
+    <section class="item-gallery" aria-label="Product gallery">${gallery.map((src, index) => `<button class="gallery-image reveal" type="button" data-gallery-index="${index}">${image(src, `${item.code} — ${isGenerated(src) ? tr('visualisation') : tr('warehouse_photo')} ${index + 1}`, false, '(max-width: 700px) 92vw, 70vw')}</button>`).join('')}</section>
     <section class="item-specs"><p class="eyebrow">${tr('details')}</p><div><dl class="spec-table"><div class="spec-row"><dt>${tr('wood')}</dt><dd>${itemText(item, 'wood')}</dd></div><div class="spec-row"><dt>${tr('type')}</dt><dd>${itemText(item, 'type')}</dd></div><div class="spec-row"><dt>${tr('weight')}</dt><dd>${item.weight_kg} kg</dd></div><div class="spec-row"><dt>${tr('carriers')}</dt><dd>${item.carriers} ${tr('carriers_unit')}</dd></div></dl><div class="dimensions"><h3>${tr('dimensions')} · CM</h3><div class="dimension-row"><span>W / ${state.lang === 'th' ? 'กว้าง' : 'Width'}</span><strong>${item.width}</strong></div><div class="dimension-row"><span>L / ${state.lang === 'th' ? 'ยาว' : 'Length'}</span><strong>${item.length}</strong></div><div class="dimension-row"><span>H / ${state.lang === 'th' ? 'สูง' : 'Height'}</span><strong>${item.height}</strong></div></div><div class="delivery-note"><h3>${tr('delivery')}</h3><p>${deliveryNote}</p></div><div class="item-actions-inline"><a class="button" href="${lineHref(lineMoreText)}" ${contactAttrs(CONTACT.lineId, true)}>${tr('line_more')} ↗</a><button class="button" id="copy-link" type="button">${tr('copy_link')} ↗</button><a class="button" href="#/visit">${tr('plan_visit')}</a></div></div></section>
     <section class="related"><div class="section-head"><h2 class="section-title">${tr('related')}</h2><a class="text-link" href="#/collection">${tr('view_all')} <span>→</span></a></div><div class="related-grid">${related.map(entry => productCard(entry)).join('')}</div></section>
     <div class="sticky-contact" id="sticky-contact"><a class="line" href="${lineHref(lineText)}" ${contactAttrs(CONTACT.lineId, true)}>${tr('line_this')}</a><a class="call" href="${telHref()}" ${contactAttrs(CONTACT.phone)}>${tr('call')} ↗</a></div>
@@ -233,9 +240,10 @@ function bindItem(code) {
     try { await navigator.clipboard.writeText(location.href); toast(tr('link_copied')); }
     catch { const input = document.createElement('input'); input.value = location.href; document.body.append(input); input.select(); document.execCommand('copy'); input.remove(); toast(tr('link_copied')); }
   });
-  const sticky = $('#sticky-contact');
-  const updateSticky = () => sticky?.classList.toggle('show', scrollY > innerHeight * .48);
-  updateSticky(); window.addEventListener('scroll', updateSticky, { passive: true, once: false });
+  // Contact bar is visible from page load (owner feedback 2026-09-17: contact was too hard to find).
+  // It is moved to <body> because the animated .page transform would otherwise trap position:fixed.
+  const sticky = $('#app #sticky-contact');
+  if (sticky) { document.body.append(sticky); setTimeout(() => sticky.classList.add('show'), 60); }
 }
 
 function bindReveals() {
@@ -266,6 +274,7 @@ function parseRoute() {
 function render() {
   const { route, code, query } = parseRoute();
   const app = $('#app');
+  $$('body > #sticky-contact').forEach(bar => bar.remove());
   window.scrollTo(0, 0);
   closeMenu();
   $$('.main-nav a,.mobile-menu a').forEach(link => link.classList.toggle('active', link.dataset.route === route));
@@ -302,7 +311,7 @@ function openCodeSearch() {
 }
 function closeCodeSearch() { $('#code-search').hidden = true; document.body.classList.remove('overlay-open'); }
 function openLightbox(index) { state.lightboxIndex = index; updateLightbox(); $('#lightbox').hidden = false; document.body.classList.add('overlay-open'); }
-function updateLightbox() { const box = $('#lightbox'); $('img', box).src = state.lightboxImages[state.lightboxIndex]; $('.lightbox-count', box).textContent = `${state.lightboxIndex + 1} / ${state.lightboxImages.length}`; }
+function updateLightbox() { const box = $('#lightbox'); $('img', box).src = versioned(state.lightboxImages[state.lightboxIndex]); $('.lightbox-count', box).textContent = `${state.lightboxIndex + 1} / ${state.lightboxImages.length}`; }
 function moveLightbox(amount) { state.lightboxIndex = (state.lightboxIndex + amount + state.lightboxImages.length) % state.lightboxImages.length; updateLightbox(); }
 function closeLightbox() { $('#lightbox').hidden = true; document.body.classList.remove('overlay-open'); }
 function toast(message) { const node = $('#toast'); node.textContent = message; node.classList.add('show'); clearTimeout(toast.timer); toast.timer = setTimeout(() => node.classList.remove('show'), 2300); }
