@@ -110,7 +110,7 @@ const statusMarkup = status => `<span class="status ${status}">${tr(status)}</sp
 // Photos built by scripts/build-web-images.cjs exist in two sizes: X.jpg (2400px) and X-sm.jpg (1200px).
 // srcset lets phones on 4G and small cards take the 1200px file while full-bleed and Retina views stay sharp.
 // IMG_V busts browser caches when photos are rebuilt under the same file names — bump it with each image rebuild.
-const IMG_V = '2026-09-17f';
+const IMG_V = '2026-09-17g';
 // Product imagery = AI renders in images/generated/ (owner decision 2026-09-17); real photos = scenes/ ambience.
 const HIRES = /^images\/(generated\/RW-\d{4}-\d+|RW-\d{4}-\d+|scenes\/[\w-]+)\.jpg$/;
 const versioned = src => `${src}?v=${IMG_V}`;
@@ -132,7 +132,7 @@ function homePage() {
   const counts = type => state.items.filter(item => item.type_key === type).length.toString().padStart(2, '0');
   return `<article class="page home-page">
     <section class="home-hero" id="home-hero">
-      <div class="home-hero-visual">${image(heroItem?.hero || 'images/warehouse-hero.jpg', 'RAAKRAK natural root-wood furniture', true)}</div>
+      <div class="home-hero-visual">${image('images/scenes/hero-carved-stump.jpg', 'RAAKRAK carved root-wood piece in the warehouse', true)}</div>
       <div class="home-hero-copy"><p class="eyebrow">${c.eyebrow}</p><h1 class="display"><span>${c.title1}</span><span>${c.title2}</span></h1><p>${c.intro}</p><div class="hero-actions"><a class="button fill" href="#/collection">${tr('view_collection')} <span>↗</span></a><a class="button" href="#/visit">${tr('plan_visit')}</a></div></div>
       <span class="scroll-cue">${c.scroll}</span>${heroIndex}
     </section>
