@@ -19,7 +19,7 @@ const copy = {
   en: {
     nav_home: 'Home', nav_collection: 'Collection', nav_craft: 'Craft', nav_stories: 'Stories', nav_visit: 'Visit',
     find_code: 'Find a piece', qr_lookup: 'QR / CODE LOOKUP', find_code_title: 'Find your exact piece', open_piece: 'Open piece ↗', code_note: 'Enter the code printed on the warehouse tag.',
-    footer_line: 'Rooted by nature. Chosen by you.', mockup_note: 'Review version — photos are real; prices, sizes and contact details are samples.',
+    footer_line: 'Rooted by nature. Chosen by you.', mockup_note: 'Review version — product images are AI visualisations; warehouse photos are real; prices, sizes and contact details are samples.',
     price_ask: 'Ask about the price on LINE', contact_pending: 'Review version — LINE and phone will open at launch.',
     available: 'Available', reserved: 'Reserved', sold: 'Sold', table: 'Tables', bench: 'Benches', stump: 'Stumps', slab: 'Slabs', decor: 'Objects', all: 'All pieces',
     view_collection: 'View collection', plan_visit: 'Plan your visit', explore_piece: 'Explore piece', view_all: 'View all pieces', discover_craft: 'Discover our craft',
@@ -33,7 +33,7 @@ const copy = {
   th: {
     nav_home: 'หน้าแรก', nav_collection: 'ชิ้นงาน', nav_craft: 'งานช่าง', nav_stories: 'เรื่องราว', nav_visit: 'เยี่ยมชม',
     find_code: 'ค้นหารหัสชิ้นงาน', qr_lookup: 'ค้นหาจากคิวอาร์ / รหัส', find_code_title: 'ค้นหาชิ้นงานของคุณ', open_piece: 'เปิดชิ้นงาน ↗', code_note: 'กรอกรหัสที่พิมพ์อยู่บนป้ายสินค้าในโกดัง',
-    footer_line: 'ธรรมชาติสร้าง คุณเป็นผู้เลือก', mockup_note: 'เวอร์ชันสำหรับรีวิว — รูปเป็นของจริง ส่วนราคา ขนาด และช่องทางติดต่อเป็นข้อมูลตัวอย่าง',
+    footer_line: 'ธรรมชาติสร้าง คุณเป็นผู้เลือก', mockup_note: 'เวอร์ชันสำหรับรีวิว — ภาพสินค้าเป็นภาพจำลอง AI ภาพโกดังเป็นของจริง ส่วนราคา ขนาด และช่องทางติดต่อเป็นข้อมูลตัวอย่าง',
     price_ask: 'ทักไลน์สอบถามราคา', contact_pending: 'เวอร์ชันรีวิว — ช่องทางไลน์และโทรศัพท์จะเปิดใช้เมื่อเปิดร้านจริง',
     available: 'พร้อมขาย', reserved: 'ติดจอง', sold: 'ขายแล้ว', table: 'โต๊ะ', bench: 'ม้านั่ง', stump: 'ตอไม้', slab: 'แผ่นไม้', decor: 'ของตกแต่ง', all: 'ทุกชิ้น',
     view_collection: 'ดูชิ้นงานทั้งหมด', plan_visit: 'วางแผนมาเยี่ยมชม', explore_piece: 'ดูชิ้นนี้', view_all: 'ดูทั้งหมด', discover_craft: 'รู้จักงานช่างของเรา',
@@ -64,9 +64,9 @@ const content = {
       ['Redwood', 'Long-grained and architectural. Its slender slabs are ideal for benches, counters and shelves.']
     ]},
     stories: { eyebrow: 'FIELD NOTES', title: 'Stories held in grain.', intro: 'Notes from the warehouse about choosing, living with and caring for wood that refuses to be ordinary.', cards: [
-      ['01 · MATERIAL', 'The grain remembers', 'Growth rings and mineral traces are a visual record of seasons. We read them as part of the composition, never as defects.', 'images/RW-0047-2.jpg'],
+      ['01 · MATERIAL', 'The grain remembers', 'Growth rings and mineral traces are a visual record of seasons. We read them as part of the composition, never as defects.', 'images/scenes/detail-teak-grain.jpg'],
       ['02 · PROCESS', 'From root to room', 'The journey begins by finding balance—not forcing symmetry. See how a raw root becomes a usable piece without losing its wildness.', 'images/warehouse-about.jpg'],
-      ['03 · COLLECTING', 'Why one piece only', 'Choosing by exact code changes the relationship. You are not buying a model; you are becoming the next custodian of one form.', 'images/RW-0048-3.jpg']
+      ['03 · COLLECTING', 'Why one piece only', 'Choosing by exact code changes the relationship. You are not buying a model; you are becoming the next custodian of one form.', 'images/scenes/warehouse-hall-root-tables.jpg']
     ]},
     visit: { eyebrow: 'VISIT THE WAREHOUSE', title: 'Walk among hundreds of singular forms.', intro: 'Bring your room dimensions, photographs and an open mind. We will help you find the piece that belongs there.', details: 'Plan your visit', hours: 'Opening hours', hoursText: 'To be confirmed', address: 'Warehouse', addressText: 'Bang Sai District (บางไทร)\nPhra Nakhon Si Ayutthaya 13190', contact: 'Contact', contactText: contactLines('LINE and phone\nannounced at launch'), appointment: 'Before you come', appointmentText: 'Please contact us one day ahead so we can prepare the pieces you would like to see.', map: 'Warehouse location', mapNote: 'Bang Sai, Phra Nakhon Si Ayutthaya', directions: 'Get directions', openMaps: 'Open in Google Maps' }
   },
@@ -87,9 +87,9 @@ const content = {
       ['ไม้แดง', 'เสี้ยนยาวและให้ความรู้สึกเชิงสถาปัตยกรรม เหมาะกับแผ่นเรียวสำหรับม้านั่ง เคาน์เตอร์ และชั้นวาง']
     ]},
     stories: { eyebrow: 'บันทึกจากโกดัง', title: 'เรื่องราวที่อยู่ในลายไม้', intro: 'บันทึกเรื่องการเลือก การอยู่ร่วม และการดูแลไม้ที่ไม่เหมือนชิ้นใด จากพื้นที่จริงของเรา', cards: [
-      ['01 · วัสดุ', 'ลายไม้จดจำเวลา', 'วงปีและรอยแร่คือบันทึกของฤดูกาล เราอ่านสิ่งเหล่านี้เป็นองค์ประกอบของชิ้นงาน ไม่ใช่ตำหนิที่ต้องลบออก', 'images/RW-0047-2.jpg'],
+      ['01 · วัสดุ', 'ลายไม้จดจำเวลา', 'วงปีและรอยแร่คือบันทึกของฤดูกาล เราอ่านสิ่งเหล่านี้เป็นองค์ประกอบของชิ้นงาน ไม่ใช่ตำหนิที่ต้องลบออก', 'images/scenes/detail-teak-grain.jpg'],
       ['02 · กระบวนการ', 'จากรากไม้สู่ห้อง', 'การเดินทางเริ่มจากการหาสมดุล ไม่ใช่บังคับให้สมมาตร มองดูรากดิบกลายเป็นชิ้นใช้งานโดยยังรักษาความเป็นธรรมชาติไว้', 'images/warehouse-about.jpg'],
-      ['03 · การสะสม', 'เหตุผลที่มีเพียงชิ้นเดียว', 'การเลือกด้วยรหัสเฉพาะเปลี่ยนความสัมพันธ์ คุณไม่ได้ซื้อสินค้ารุ่นหนึ่ง แต่กำลังเป็นผู้ดูแลรูปทรงหนึ่งเดียวต่อจากธรรมชาติ', 'images/RW-0048-3.jpg']
+      ['03 · การสะสม', 'เหตุผลที่มีเพียงชิ้นเดียว', 'การเลือกด้วยรหัสเฉพาะเปลี่ยนความสัมพันธ์ คุณไม่ได้ซื้อสินค้ารุ่นหนึ่ง แต่กำลังเป็นผู้ดูแลรูปทรงหนึ่งเดียวต่อจากธรรมชาติ', 'images/scenes/warehouse-hall-root-tables.jpg']
     ]},
     visit: { eyebrow: 'เยี่ยมชมโกดัง', title: 'เดินท่ามกลางรูปทรงนับร้อยที่ไม่ซ้ำกัน', intro: 'นำขนาดห้อง ภาพถ่าย และใจที่เปิดกว้างมา เราจะช่วยคุณหาชิ้นที่เหมาะกับพื้นที่จริง', details: 'วางแผนการเยี่ยมชม', hours: 'เวลาเปิด', hoursText: 'รอยืนยัน', address: 'โกดัง', addressText: 'อ.บางไทร\nจ.พระนครศรีอยุธยา 13190', contact: 'ติดต่อ', contactText: contactLines('ไลน์และเบอร์โทร\nจะแจ้งเมื่อเปิดร้าน'), appointment: 'ก่อนเดินทาง', appointmentText: 'กรุณาติดต่อเราล่วงหน้าหนึ่งวัน เพื่อเตรียมชิ้นงานที่คุณสนใจไว้ให้ชม', map: 'ตำแหน่งโกดัง', mapNote: 'อ.บางไทร จ.พระนครศรีอยุธยา', directions: 'นำทาง', openMaps: 'เปิดใน Google Maps' }
   }
@@ -110,8 +110,9 @@ const statusMarkup = status => `<span class="status ${status}">${tr(status)}</sp
 // Photos built by scripts/build-web-images.cjs exist in two sizes: X.jpg (2400px) and X-sm.jpg (1200px).
 // srcset lets phones on 4G and small cards take the 1200px file while full-bleed and Retina views stay sharp.
 // IMG_V busts browser caches when photos are rebuilt under the same file names — bump it with each image rebuild.
-const IMG_V = '2026-09-17d';
-const HIRES = /^images\/(RW-\d{4}-\d+|scenes\/[\w-]+)\.jpg$/;
+const IMG_V = '2026-09-17f';
+// Product imagery = AI renders in images/generated/ (owner decision 2026-09-17); real photos = scenes/ ambience.
+const HIRES = /^images\/(generated\/RW-\d{4}-\d+|RW-\d{4}-\d+|scenes\/[\w-]+)\.jpg$/;
 const versioned = src => `${src}?v=${IMG_V}`;
 const srcsetFor = src => HIRES.test(src) ? `srcset="${versioned(src.replace(/\.jpg$/, '-sm.jpg'))} 1200w, ${versioned(src)} 2400w"` : '';
 const image = (src, alt, eager = false, sizes = '100vw') => `<img src="${versioned(src)}" ${srcsetFor(src)} sizes="${sizes}" alt="${alt}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
