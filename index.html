@@ -4,53 +4,121 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#f3efe7">
-  <meta name="description" content="RAAKRAK — one-of-a-kind natural root-wood furniture from Thailand.">
+  <meta name="description" content="RAAKRAK: one-of-a-kind natural root-wood furniture from a warehouse in Bang Sai, Ayutthaya, Thailand.">
   <!-- REVIEW PHASE (2026-09-17): keep search engines out while pieces, prices and contacts are samples.
        Remove this line at launch. -->
   <meta name="robots" content="noindex, nofollow">
   <!-- Site-level Open Graph / Twitter card (docs/07 D3).
-       Review phase: og:image points at the GitHub Pages review URL.
-       EDIT-ME at E3: Open Graph requires ABSOLUTE URLs — switch to the final domain (from A3). Do not print QR tags before this is real.
+       Review phase: og:image points at the GitHub Pages review URL and a REAL warehouse photo.
+       EDIT-ME at E3: Open Graph requires ABSOLUTE URLs. Switch to the final domain (from A3). Do not print QR tags before this is real.
        Per-piece link previews are impossible with hash routing (crawlers ignore the URL fragment)
        — accepted limitation (docs/07 D3). -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="RAAKRAK — Rooted by Nature">
-  <meta property="og:description" content="One-of-a-kind natural root-wood furniture from Thailand. Root tables, benches, stumps and carved forms — every piece a single form, never repeated.">
-  <meta property="og:image" content="https://paamzuza77.github.io/raakrak/images/warehouse-hero.jpg">
+  <meta property="og:title" content="RAAKRAK · Rooted by Nature">
+  <meta property="og:description" content="One-of-a-kind natural root-wood furniture from Thailand. Root tables, benches, stumps and carved forms. Every piece is a single form, never repeated.">
+  <meta property="og:image" content="https://paamzuza77.github.io/raakrak/images/scenes/warehouse-hall-wagon-wheels.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="1600">
   <meta name="twitter:card" content="summary_large_image">
-  <title>RAAKRAK — Rooted by Nature</title>
+  <title>RAAKRAK · Rooted by Nature</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="preload" href="fonts/Manrope-Variable.ttf" as="font" type="font/ttf" crossorigin>
+  <!-- ?v= busts browser caches on each published release; bump it when css/js change. -->
+  <link rel="stylesheet" href="css/styles.css?v=2026-09-17b">
 </head>
 <body>
-  <a class="skip-link" href="#app">Skip to content</a>
+  <a class="skip-link" href="#app" data-i18n="skip">Skip to content</a>
+
   <header class="site-header" id="site-header">
-    <a class="brand" href="#/home" aria-label="RAAKRAK home"><span class="brand-symbol" aria-hidden="true"></span><span><strong>RAAKRAK</strong><small>รากรัก</small></span></a>
-    <nav class="main-nav" aria-label="Primary navigation">
-      <a href="#/home" data-route="home" data-i18n="nav_home">Home</a><a href="#/collection" data-route="collection" data-i18n="nav_collection">Collection</a><a href="#/visit" data-route="visit" data-i18n="nav_visit">Visit</a>
-    </nav>
-    <div class="header-actions">
-      <button class="code-trigger" id="code-trigger" type="button" aria-label="Find by piece code"><span aria-hidden="true">⌕</span><span data-i18n="find_code">Find a piece</span></button>
-      <button class="lang-toggle" id="lang-toggle" type="button" aria-label="Switch language"><span class="lang-current">EN</span><span class="lang-divider">/</span><span class="lang-other">TH</span></button>
-      <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span><span class="sr-only">Open menu</span></button>
+    <div class="header-inner">
+      <a class="brand" href="#/home" aria-label="RAAKRAK home"><span class="brand-symbol" aria-hidden="true"></span><span class="brand-words"><strong>RAAKRAK</strong><small>รากรัก</small></span></a>
+      <nav class="main-nav" aria-label="Primary navigation">
+        <a href="#/home" data-route="home" data-i18n="nav_home">Home</a>
+        <a href="#/collection" data-route="collection" data-i18n="nav_collection">Collection</a>
+        <a href="#/visit" data-route="visit" data-i18n="nav_visit">Visit</a>
+      </nav>
+      <div class="header-actions">
+        <button class="header-search" id="code-trigger" type="button" data-i18n-aria="find_code_aria" aria-label="Find a piece by code"><span data-icon="search"></span><span class="header-search-label" data-i18n="find_code">Find a piece</span></button>
+        <button class="lang-toggle" id="lang-toggle" type="button" data-i18n-aria="switch_lang" aria-label="Switch language"><span data-lang="en">EN</span><span data-lang="th">TH</span></button>
+        <button class="icon-btn menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" data-i18n-aria="open_menu" aria-label="Open menu"><span data-icon="menu" class="icon--24 icon-menu"></span><span data-icon="close" class="icon--24 icon-close"></span></button>
+      </div>
     </div>
   </header>
-  <aside class="mobile-menu" id="mobile-menu" aria-hidden="true">
-    <nav aria-label="Mobile navigation"><a href="#/home" data-route="home" data-i18n="nav_home">Home</a><a href="#/collection" data-route="collection" data-i18n="nav_collection">Collection</a><a href="#/visit" data-route="visit" data-i18n="nav_visit">Visit</a></nav>
-    <p>Natural forms. Never repeated.</p>
-  </aside>
-  <div class="code-search" id="code-search" role="dialog" aria-modal="true" aria-labelledby="code-search-title" hidden>
-    <button class="overlay-close" type="button" aria-label="Close">×</button>
-    <div class="code-search-inner"><p class="kicker" data-i18n="qr_lookup">QR / CODE LOOKUP</p><h2 id="code-search-title" data-i18n="find_code_title">Find your exact piece</h2><form id="code-search-form"><input id="code-search-input" type="search" placeholder="RW-0041" aria-label="Piece code" autocomplete="off"><button type="submit" data-i18n="open_piece">Open piece ↗</button></form><p class="code-search-note" data-i18n="code_note">Enter the code printed on the warehouse tag.</p></div>
+
+  <div class="mobile-menu" id="mobile-menu" hidden>
+    <nav aria-label="Mobile navigation">
+      <a href="#/home" data-route="home" data-i18n="nav_home">Home</a>
+      <a href="#/collection" data-route="collection" data-i18n="nav_collection">Collection</a>
+      <a href="#/visit" data-route="visit" data-i18n="nav_visit">Visit</a>
+    </nav>
+    <div class="menu-contact">
+      <a class="btn btn--contact btn--block" data-contact="line" href="#"><span data-icon="chat"></span><span data-i18n="line_chat">Chat on LINE</span></a>
+      <a class="btn btn--secondary btn--block" data-contact="call" href="#"><span data-icon="phone"></span><span data-i18n="call">Call</span></a>
+      <p class="menu-address"><span data-icon="map-pin"></span><span data-i18n="address_short">Bang Sai, Ayutthaya</span></p>
+    </div>
   </div>
+
+  <div class="code-search" id="code-search" role="dialog" aria-modal="true" aria-labelledby="code-search-title" hidden>
+    <button class="icon-btn overlay-close" type="button" data-i18n-aria="close" aria-label="Close"><span data-icon="close" class="icon--24"></span></button>
+    <div class="code-search-inner">
+      <p class="eyebrow on-dark" data-i18n="qr_lookup">QR / code lookup</p>
+      <h2 id="code-search-title" data-i18n="find_code_title">Find your exact piece</h2>
+      <form id="code-search-form" class="code-search-form" novalidate>
+        <label class="sr-only" for="code-search-input" data-i18n="piece_code">Piece code</label>
+        <input id="code-search-input" type="text" inputmode="text" autocapitalize="characters" autocomplete="off" spellcheck="false" placeholder="RW-0041">
+        <button class="btn btn--light" type="submit"><span data-i18n="open_piece">Open piece</span><span data-icon="arrow-right"></span></button>
+      </form>
+      <p class="code-search-note" data-i18n="code_note">Enter the code printed on the warehouse tag.</p>
+    </div>
+  </div>
+
   <main id="app" tabindex="-1"></main>
-  <footer class="site-footer">
-    <div class="footer-top"><a class="footer-brand" href="#/home">RAAKRAK <span>รากรัก</span></a><p data-i18n="footer_line">Rooted by nature. Chosen by you.</p></div>
-    <nav aria-label="Footer navigation"><a href="#/collection" data-i18n="nav_collection">Collection</a><a href="#/visit" data-i18n="nav_visit">Visit</a></nav>
-    <div class="footer-bottom"><p>© 2026 RAAKRAK</p><p data-i18n="mockup_note">Design mockup — product visualisations are generated from warehouse references.</p></div>
+
+  <footer class="site-footer on-dark">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand-col">
+          <a class="footer-brand" href="#/home">RAAKRAK <span>รากรัก</span></a>
+          <p data-i18n="footer_line">Rooted by nature. Chosen by you.</p>
+        </div>
+        <nav class="footer-col" aria-label="Footer navigation">
+          <h2 data-i18n="footer_explore">Explore</h2>
+          <a href="#/home" data-i18n="nav_home">Home</a>
+          <a href="#/collection" data-i18n="nav_collection">Collection</a>
+          <a href="#/visit" data-i18n="nav_visit">Visit</a>
+        </nav>
+        <div class="footer-col">
+          <h2 data-i18n="nav_visit">Visit</h2>
+          <p class="icon-line"><span data-icon="map-pin"></span><span data-i18n="address_text">Bang Sai District (บางไทร), Phra Nakhon Si Ayutthaya 13190, Thailand</span></p>
+          <p class="icon-line"><span data-icon="clock"></span><span><span data-i18n="hours">Opening hours</span>: <span data-i18n="hours_tbc">To be confirmed</span></span></p>
+        </div>
+        <div class="footer-col">
+          <h2 data-i18n="footer_contact">Contact</h2>
+          <a class="btn btn--contact btn--block" data-contact="line" href="#"><span data-icon="chat"></span><span data-i18n="line_chat">Chat on LINE</span></a>
+          <a class="btn btn--light btn--block" data-contact="call" href="#"><span data-icon="phone"></span><span data-i18n="call">Call</span></a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 RAAKRAK</p>
+        <p data-i18n="mockup_note">Review version: pieces, prices, sizes and contact details are samples.</p>
+      </div>
+    </div>
   </footer>
-  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" hidden><button class="lightbox-close" type="button" aria-label="Close image">×</button><button class="lightbox-arrow lightbox-prev" type="button" aria-label="Previous image">←</button><img src="" alt=""><button class="lightbox-arrow lightbox-next" type="button" aria-label="Next image">→</button><p class="lightbox-count" aria-live="polite"></p></div>
+
+  <!-- Mobile contact bar for the piece page. Lives outside <main> so page transitions never move it. -->
+  <div id="action-bar-slot"></div>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" data-i18n-aria="image_viewer" aria-label="Image viewer" hidden>
+    <button class="icon-btn lightbox-close" type="button" data-i18n-aria="close" aria-label="Close"><span data-icon="close" class="icon--24"></span></button>
+    <figure class="lightbox-stage">
+      <img src="data:," alt="">
+      <figcaption class="lightbox-caption"><span class="lightbox-label"></span><span class="lightbox-count" aria-live="polite"></span></figcaption>
+    </figure>
+    <button class="icon-btn lightbox-prev" type="button" data-i18n-aria="prev_photo" aria-label="Previous photo"><span data-icon="chevron-left" class="icon--24"></span></button>
+    <button class="icon-btn lightbox-next" type="button" data-i18n-aria="next_photo" aria-label="Next photo"><span data-icon="chevron-right" class="icon--24"></span></button>
+  </div>
+
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="js/app.js" defer></script>
+  <script src="js/app.js?v=2026-09-17b" defer></script>
 </body>
 </html>
