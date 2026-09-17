@@ -112,7 +112,8 @@ const statusMarkup = status => `<span class="status ${status}">${tr(status)}</sp
 // IMG_V busts browser caches when photos are rebuilt under the same file names — bump it with each image rebuild.
 const IMG_V = '2026-09-17g';
 // Product imagery = AI renders in images/generated/ (owner decision 2026-09-17); real photos = scenes/ ambience.
-const HIRES = /^images\/(generated\/RW-\d{4}-\d+|RW-\d{4}-\d+|scenes\/[\w-]+)\.jpg$/;
+// Real pieces synced by scripts/sync-catalog.mjs: images/{CODE}-{n}-{rev}.jpg (+ -sm), rev = 8 hex.
+const HIRES = /^images\/(generated\/RW-\d{4}-\d+|RW-\d{4}-\d+(?:-[0-9a-f]{8})?|scenes\/[\w-]+)\.jpg$/;
 const versioned = src => `${src}?v=${IMG_V}`;
 const srcsetFor = src => HIRES.test(src) ? `srcset="${versioned(src.replace(/\.jpg$/, '-sm.jpg'))} 1200w, ${versioned(src)} 2400w"` : '';
 const image = (src, alt, eager = false, sizes = '100vw') => `<img src="${versioned(src)}" ${srcsetFor(src)} sizes="${sizes}" alt="${alt}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
